@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebad Alrahman - Mobile Store & Service Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .business-card {
+            width: 100%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo-container {
+            width: 160px;
+            height: 160px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 5px solid white;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+        }
+        
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            color: #2c3e50;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .logo-placeholder i {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .logo-placeholder span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .qr-text {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .add-contact-btn {
+            background-color: #686868;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .add-contact-btn:hover {
+            background-color: #19653a;
+            transform: translateY(-2px);
+        }
+        
+        .card-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .card-body {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 25px;
+            }
+            
+            /* Center all content on mobile */
+            .card-header {
+                padding: 25px 20px;
+            }
+            
+            .logo-section {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .logo-container {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .add-contact-btn {
+                max-width: 100%;
+            }
+            
+            .section-title {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .contact-item, .social-item {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+                padding: 20px 15px;
+            }
+            
+            .contact-icon, .social-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .contact-details, .social-item h4, .social-item p {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .company-info, .summary-section {
+                text-align: center;
+            }
+            
+            .summary-text {
+                text-align: center;
+            }
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (max-width: 480px) {
+            .section-title {
+                justify-content: center;
+            }
+        }
+        
+        .section-title i {
+            color: #686868;
+        }
+        
+        .contact-info, .company-info, .summary-section, .social-section {
+            margin-bottom: 25px;
+        }
+        
+        .contact-item, .social-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .contact-item:hover, .social-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+            border-color: #3498db;
+        }
+        
+        .contact-icon, .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #3498db;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 3px;
+        }
+        
+        .contact-details p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .company-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .summary-text {
+            font-size: 16px;
+            color: #555;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            line-height: 1.7;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        @media (max-width: 480px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-item {
+                padding: 20px;
+            }
+        }
+        
+        .social-item {
+            text-align: center;
+            padding: 20px 10px;
+        }
+        
+        .social-item .social-icon {
+            margin-right: 0;
+            margin-bottom: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .social-item h4 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            margin-left: 10px;
+            margin-right: 6px;
+        }
+        
+        .social-item p {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .location-details {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast i {
+            color: #27ae60;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 20px;
+        }
+        
+        /* Mobile-specific centering */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+            
+            .business-card {
+                margin: 0 auto;
+            }
+            
+            .left-column, .right-column {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-info, .company-info, .summary-section, .social-section {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+        
+        /* Small mobile adjustments */
+        @media (max-width: 375px) {
+            .card-header {
+                padding: 20px 15px;
+            }
+            
+            .card-body {
+                padding: 20px 15px;
+            }
+            
+            .logo-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .summary-text {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="business-card">
+        <div class="card-header">
+            <div class="logo-section">
+                <div class="logo-container" id="logoContainer">
+                    <!-- Replace this with your logo PNG -->
+                    <img src="./assets/logo.png" alt="Ebad Alrahman Logo">
+                    <!-- 
+                    To use your actual logo:
+                    1. Replace the div.logo-placeholder with: <img src="your-logo.png" alt="Ebad Alrahman Logo">
+                    2. Remove the .logo-placeholder CSS rules if not needed
+                    -->
+                </div>
+                
+                <button class="add-contact-btn" id="addContactBtn">
+                    <i class="fas fa-user-plus"></i> Add contact
+                </button>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="left-column">
+                <div class="contact-info">
+                    <h2 class="section-title"><i class="fas fa-address-book"></i> Contact</h2>
+                    
+                    <div class="contact-item" id="phone1">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+01060165515</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="phone2">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+01202432356</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="email">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>ebadalrahman1411@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="website">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Website</h4>
+                            <p>ebadalrahman.store</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="location">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p class="location-details">19 Ibn Mosleh Al Arman, Sidi Beshr Bahri, Montana 1, Alexandria (EG), Egypt</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="company-info">
+                    <h2 class="section-title"><i class="fas fa-building"></i> Company</h2>
+                    <div class="company-name">Ebad Alrahman</div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="summary-section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Summary</h2>
+                    <p class="summary-text">Your trusted mobile store & service Center, serving thousands with care and proficiency.</p>
+                </div>
+                
+                <div class="social-section">
+                    <h2 class="section-title"><i class="fas fa-share-alt"></i> Social media</h2>
+                    
+                    <div class="social-grid">
+                        <div class="social-item" id="onlineStore">
+                            <div class="social-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h4>Online Store</h4>
+                            <p>Visit our store</p>
+                        </div>
+                        
+                        <div class="social-item" id="whatsapp">
+                            <div class="social-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h4>WhatsApp</h4>
+                            <p>Chat with us</p>
+                        </div>
+                        
+                        <div class="social-item" id="facebook">
+                            <div class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <h4>Facebook</h4>
+                            <p>Follow us</p>
+                        </div>
+                        
+                        <div class="social-item" id="tiktok">
+                            <div class="social-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <h4>TikTok</h4>
+                            <p>Watch our videos</p>
+                        </div>
+                        
+                        <div class="social-item" id="instagram">
+                            <div class="social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <h4>Instagram</h4>
+                            <p>Follow us</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Ebad Alrahman. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastText">Redirecting to the link...</span>
+    </div>
+
+    <script>
+        // Define the links for each interactive element
+        const links = {
+            logoContainer: "https://myqrcode.mobi/gr/a7439ea6/view",
+            phone1: "tel:+01060165515",
+            phone2: "tel:+01202432356",
+            email: "mailto:ebadalrahman1411@gmail.com",
+            website: "https://ebadalrahman.store",
+            location: "https://maps.google.com/?q=19+Ibn+Mosleh+Al+Arman,+Sidi+Beshr+Bahri,+Montana+1,+Alexandria+(EG),+Egypt",
+            onlineStore: "https://ebadalrahman.store",
+            whatsapp: "https://wa.me/201060165515",
+            facebook: "https://facebook.com/ebadalrahman",
+            tiktok: "https://tiktok.com/@ebadalrahman",
+            instagram: "https://instagram.com/ebadalrahman"
+        };
+        
+        // Get the toast element
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
+        
+        // Function to show toast notification
+        function showToast(message) {
+            toastText.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Function to open link and show toast
+        function openLink(url, elementId) {
+            // Show toast notification
+            const elementNames = {
+                logoContainer: "QR Code page",
+                phone1: "Phone: +01060165515",
+                phone2: "Phone: +01202432356",
+                email: "Email client",
+                website: "Ebad Alrahman Store",
+                location: "Google Maps",
+                onlineStore: "Online Store",
+                whatsapp: "WhatsApp",
+                facebook: "Facebook",
+                tiktok: "TikTok",
+                instagram: "Instagram"
+            };
+            
+            showToast(`Opening ${elementNames[elementId]}...`);
+            
+            // Open the link after a short delay to allow toast to show
+            setTimeout(() => {
+                window.open(url, '_blank');
+            }, 500);
+        }
+        
+        // Add click event listeners to all interactive elements
+        document.getElementById('logoContainer').addEventListener('click', () => {
+            openLink(links.logoContainer, 'logoContainer');
+        });
+        
+        document.getElementById('phone1').addEventListener('click', () => {
+            openLink(links.phone1, 'phone1');
+        });
+        
+        document.getElementById('phone2').addEventListener('click', () => {
+            openLink(links.phone2, 'phone2');
+        });
+        
+        document.getElementById('email').addEventListener('click', () => {
+            openLink(links.email, 'email');
+        });
+        
+        document.getElementById('website').addEventListener('click', () => {
+            openLink(links.website, 'website');
+        });
+        
+        document.getElementById('location').addEventListener('click', () => {
+            openLink(links.location, 'location');
+        });
+        
+        document.getElementById('onlineStore').addEventListener('click', () => {
+            openLink(links.onlineStore, 'onlineStore');
+        });
+        
+        document.getElementById('whatsapp').addEventListener('click', () => {
+            openLink(links.whatsapp, 'whatsapp');
+        });
+        
+        document.getElementById('facebook').addEventListener('click', () => {
+            openLink(links.facebook, 'facebook');
+        });
+        
+        document.getElementById('tiktok').addEventListener('click', () => {
+            openLink(links.tiktok, 'tiktok');
+        });
+        
+        document.getElementById('instagram').addEventListener('click', () => {
+            openLink(links.instagram, 'instagram');
+        });
+        
+        // Add contact button functionality
+        document.getElementById('addContactBtn').addEventListener('click', () => {
+            // Create a vCard for downloading
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Ebad Alrahman
+TEL:+01060165515
+TEL:+01202432356
+EMAIL:ebadalrahman1411@gmail.com
+URL:https://ebadalrahman.store
+ADR:;;19 Ibn Mosleh Al Arman, Sidi Beshr Bahri, Montana 1, Alexandria (EG), Egypt
+ORG:Ebad Alrahman
+NOTE:Your trusted mobile store & service Center, serving thousands with care and proficiency.
+END:VCARD`;
+            
+            // Create a blob and download link
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Ebad Alrahman.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showToast("Contact card downloaded. Open it to add to contacts.");
+        });
+        
+        // Add some visual feedback on hover for all interactive elements
+        const interactiveElements = document.querySelectorAll('.contact-item, .social-item, .logo-container, .add-contact-btn');
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 5px 15px rgba(52, 152, 219, 0.2)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+        
+        // Function to load logo image
+        function loadLogo(imageUrl) {
+            const logoContainer = document.getElementById('logoContainer');
+            logoContainer.innerHTML = `<img src="${imageUrl}" alt="Ebad Alrahman Logo">`;
+        }
+        
+        // Uncomment and replace with your logo URL when ready
+        // loadLogo("your-logo.png");
+    </script>
+</body>
+</html>
